@@ -4,18 +4,23 @@
 	xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="
-   http://www.springframework.org/schema/beans     
-   http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
-   http://www.springframework.org/schema/context 
-   http://www.springframework.org/schema/context/spring-context-4.0.xsd
-   http://www.springframework.org/schema/mvc
-   http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
+			http://www.springframework.org/schema/beans     
+			http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+			http://www.springframework.org/schema/context 
+			http://www.springframework.org/schema/context/spring-context-4.0.xsd
+			http://www.springframework.org/schema/mvc
+			http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
 
+
+	<!-- Spring Web MVC -->
 	<mvc:annotation-driven />
 	
-	<context:component-scan base-package="kk.lawsn.ssm.controller" />
-	<context:component-scan base-package="kk.lawsn.ssm.service" />
+	<!-- scan Controller -->
+	<context:component-scan base-package="lawsn.controller" />
+	<!-- scan Service -->
+	<context:component-scan base-package="lawsn.service" />
 
+	<!-- ViewResolver -->
 	<bean id="viewResolver"
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>

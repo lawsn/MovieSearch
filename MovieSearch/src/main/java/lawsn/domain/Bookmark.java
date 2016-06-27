@@ -1,11 +1,11 @@
-package kk.lawsn.ssm.domain;
+package lawsn.domain;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.Lob;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Bookmark {
@@ -39,6 +39,11 @@ public class Bookmark {
 
 	public Long getCreateTime() {
 		return createTime;
+	}
+	
+	public String getCreateDate() {
+		Date date = new Date(createTime);
+		return (new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")).format(date);
 	}
 
 	public void setCreateTime(Long createTime) {

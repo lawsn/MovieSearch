@@ -1,4 +1,4 @@
-package kk.lawsn.ssm.repository;
+package lawsn.repository;
 
 import static org.junit.Assert.assertEquals;
 
@@ -23,8 +23,9 @@ import org.springframework.data.domain.Sort;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import kk.lawsn.ssm.domain.Bookmark;
-import kk.lawsn.ssm.utils.DaumOpenApiHelper;
+import lawsn.domain.Bookmark;
+import lawsn.repository.BookmarkRepository;
+import lawsn.utils.DaumOpenApiHelper;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("classpath:database-context.xml")

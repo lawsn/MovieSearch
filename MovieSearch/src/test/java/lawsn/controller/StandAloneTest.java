@@ -1,4 +1,4 @@
-package kk.lawsn.ssm.controller;
+package lawsn.controller;
 
 //이부분 추가하셔야 합니다.
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -10,6 +10,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+
+import lawsn.controller.SearchController;
 
 public class StandAloneTest {
 

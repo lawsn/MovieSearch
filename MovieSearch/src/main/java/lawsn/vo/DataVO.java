@@ -1,4 +1,4 @@
-package kk.lawsn.ssm.vo;
+package lawsn.vo;
 
 public class DataVO {
 

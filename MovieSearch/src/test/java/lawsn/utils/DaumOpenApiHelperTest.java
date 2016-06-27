@@ -1,4 +1,4 @@
-package kr.lawsn.ssm.utils;
+package lawsn.utils;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -11,7 +11,7 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.junit.Test;
 
-import kk.lawsn.ssm.utils.DaumOpenApiHelper;
+import lawsn.utils.DaumOpenApiHelper;
 
 public class DaumOpenApiHelperTest {
 

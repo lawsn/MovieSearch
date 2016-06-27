@@ -1,4 +1,4 @@
-package kk.lawsn.ssm.controller;
+package lawsn.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import kk.lawsn.ssm.domain.Bookmark;
-import kk.lawsn.ssm.service.BookmarkService;
+import lawsn.domain.Bookmark;
+import lawsn.service.BookmarkService;
 
 @Controller
 public class BookmarkController {

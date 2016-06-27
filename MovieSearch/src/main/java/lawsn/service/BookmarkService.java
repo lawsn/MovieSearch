@@ -1,4 +1,4 @@
-package kk.lawsn.ssm.service;
+package lawsn.service;
 
 import javax.annotation.Resource;
 import javax.transaction.Transactional;
@@ -6,20 +6,15 @@ import javax.transaction.Transactional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
-import kk.lawsn.ssm.domain.Bookmark;
-import kk.lawsn.ssm.repository.BookmarkRepository;
+import lawsn.domain.Bookmark;
+import lawsn.repository.BookmarkRepository;
 
 @Service
 @Transactional
 public class BookmarkService {
-	
-	private String[] sortFields = {
-			
-	};
 
 	@Resource
 	private BookmarkRepository bookmarkRepository;

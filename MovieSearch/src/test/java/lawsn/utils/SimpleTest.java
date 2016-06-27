@@ -1,4 +1,4 @@
-package kr.lawsn.ssm.utils;
+package lawsn.utils;
 
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;

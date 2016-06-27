@@ -14,6 +14,7 @@
 			<col width="10%" />
 			<col width="10%" />
 			<col width="10%" />
+			<col width="10%" />
 		</colgroup>
 		<thead>
 			<tr>
@@ -21,6 +22,7 @@
 				<th scope="col"><a href="javascript:ssm.bookmark(0, 'ASC', 'title');">▲</a>제목<a href="javascript:ssm.bookmark(0, 'DESC', 'title');">▼</a></th>
 				<th scope="col"><a href="javascript:ssm.bookmark(0, 'ASC', 'grades');">▲</a>평점<a href="javascript:ssm.bookmark(0, 'DESC', 'grades');">▼</a></th>
 				<th scope="col"><a href="javascript:ssm.bookmark(0, 'ASC', 'openInfo');">▲</a>개봉일<a href="javascript:ssm.bookmark(0, 'DESC', 'openInfo');">▼</a></th>
+				<th scope="col"><a href="javascript:ssm.bookmark(0, 'ASC', 'createTime');">▲</a>등록일<a href="javascript:ssm.bookmark(0, 'DESC', 'createTime');">▼</a></th>
 				<th scope="col">삭제</th>
 			</tr>
 		</thead>
@@ -35,6 +37,7 @@
 				</td>
 				<td><c:out value="${record.grades}" /></td>
 				<td><c:out value="${record.openInfo}" /></td>
+				<td><c:out value="${record.createDate}" /></td>
 				<td>
 					<a href="javascript:ssm.remove('${record.seq}');">삭제</a>
 				</td>
@@ -43,7 +46,7 @@
 		</c:when>
 		<c:otherwise>
 			<tr>
-				<td colspan="5" style="text-align:center;">정보가 없습니다.</td>
+				<td colspan="6" style="text-align:center;">정보가 없습니다.</td>
 			</tr>
 		</c:otherwise>
 		</c:choose>
