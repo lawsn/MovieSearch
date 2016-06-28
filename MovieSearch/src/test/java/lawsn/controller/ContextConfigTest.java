@@ -18,7 +18,7 @@ import org.springframework.web.context.WebApplicationContext;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
-@ContextConfiguration(locations = "classpath:servlet-context.xml")
+@ContextConfiguration(locations = "classpath:spring/servlet-context.xml")
 public class ContextConfigTest {
 
 	@Autowired

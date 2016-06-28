@@ -15,7 +15,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
-@ContextConfiguration({"classpath:servlet-context.xml", "classpath:database-context.xml"})
+@ContextConfiguration({"classpath:spring/servlet-context.xml", "classpath:spring/database-context.xml"})
 public class SearchControllerTest {
 
 	private MockMvc mockMvc;

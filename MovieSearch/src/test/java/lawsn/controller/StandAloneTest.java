@@ -13,7 +13,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration({"classpath:servlet-context.xml", "classpath:database-context.xml"})
+@ContextConfiguration({"classpath:spring/servlet-context.xml", "classpath:spring/database-context.xml"})
 public class StandAloneTest {
 
 	private MockMvc mockMvc;

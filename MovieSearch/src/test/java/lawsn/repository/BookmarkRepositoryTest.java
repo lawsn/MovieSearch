@@ -30,7 +30,7 @@ import lawsn.service.SearchService;
 import lawsn.service.impl.DaumSearchServiceImpl;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration({"classpath:servlet-context.xml", "classpath:database-context.xml"})
+@ContextConfiguration({"classpath:spring/servlet-context.xml", "classpath:spring/database-context.xml"})
 public class BookmarkRepositoryTest {
 
 	@Autowired
