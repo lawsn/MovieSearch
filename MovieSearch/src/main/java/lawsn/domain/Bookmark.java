@@ -3,6 +3,7 @@ package lawsn.domain;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -17,46 +18,54 @@ import javax.persistence.Id;
 public class Bookmark {
 	
 	/**
-	 * 기본 생성자
-	 */
-	public Bookmark() {
-	}
-
-	/**
 	 * 북마크번호
 	 */
-	@Id @GeneratedValue
+	@Id
+	@Column(name="seq")
+	@GeneratedValue
 	private int seq;
 	
 	/**
 	 * 북마크 생성일시 (currentTimeMillis)
 	 */
+	@Column(name="create_time")
 	private Long createTime;
 	
 	/**
 	 * 섬네일
 	 */
+	@Column(name="thumbnail")
 	private String thumbnail;
 	
 	/**
 	 * 영화제목
 	 */
+	@Column(name="title")
 	private String title;
 
 	/**
 	 * 영화평점
 	 */
+	@Column(name="grades")
 	private String grades;
 	
 	/**
 	 * 개봉일
 	 */
+	@Column(name="open_info")
 	private String openInfo;
 	
 	/**
 	 * 영화정보 URL
 	 */
+	@Column(name="title_link")
 	private String titleLink;
+	
+	/**
+	 * 기본 생성자
+	 */
+	public Bookmark() {
+	}
 	
 	/**
 	 * 북마크번호 get
@@ -87,6 +96,9 @@ public class Bookmark {
 	 * @return 북마크 생성일시 (yyyy-MM-dd HH:mm:ss)
 	 */
 	public String getCreateDate() {
+		if(createTime == null) {
+			return null;
+		}
 		Date date = new Date(createTime);
 		return (new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")).format(date);
 	}
