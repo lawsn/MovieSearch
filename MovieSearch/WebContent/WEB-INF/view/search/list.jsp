@@ -69,15 +69,15 @@
 	</div>
 	
 	<%-- 이전,다음 페이징 처리 영역 --%>
-	<div>
+	<div style="text-align:center;">
 		<c:if test="${p > 1}">
-		<span>
-			<a href="javascript:mv.search('<c:out value="${q}" />', '<c:out value="${p - 1}" />');">이전</a>
+		<span style="position:absolute; left:40%; padding-right: 10px;">
+			<a href="javascript:mv.search('<c:out value="${q}" />', '<c:out value="${p - 1}" />');">◀이전</a>
 		</span>
 		</c:if>
 		<c:if test="${t > (p * r)}">
-		<span style="text-align:right;">
-			<a href="javascript:mv.search('<c:out value="${q}" />', '<c:out value="${p + 1}" />');">다음</a>
+		<span style="position:absolute; right:40%; padding-left: 10px;">
+			<a href="javascript:mv.search('<c:out value="${q}" />', '<c:out value="${p + 1}" />');">다음▶</a>
 		</span>
 		</c:if>
 	</div>

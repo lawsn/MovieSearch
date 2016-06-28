@@ -11,10 +11,10 @@
 		<colgroup>
 			<col width="72" />
 			<col />
-			<col width="10%" />
-			<col width="10%" />
-			<col width="10%" />
-			<col width="10%" />
+			<col width="12%" />
+			<col width="12%" />
+			<col width="12%" />
+			<col width="12%" />
 		</colgroup>
 		<thead>
 			<tr>
@@ -55,15 +55,15 @@
 </div>
 
 <%-- 이전,다음 페이징 처리 영역 --%>
-<div>
+<div style="text-align:center;">
 	<c:if test="${list.first == false}">
-	<span>
-		<a href="javascript:mv.bookmark('<c:out value="${list.number - 1}" />', '${o}', '${s}');">이전</a>
+	<span style="position:absolute; left:40%; padding-right: 10px;">
+		<a href="javascript:mv.bookmark('<c:out value="${list.number - 1}" />', '${o}', '${s}');">◀이전</a>
 	</span>
 	</c:if>
 	<c:if test="${list.last == false}">
-	<span style="text-align:right;">
-		<a href="javascript:mv.bookmark('<c:out value="${list.number + 1}" />', '${o}', '${s}');" style="text-align:right;">다음</a>
+	<span style="position:absolute; right:40%; padding-left: 10px;">
+		<a href="javascript:mv.bookmark('<c:out value="${list.number + 1}" />', '${o}', '${s}');" style="text-align:right;">다음▶</a>
 	</span>
 	</c:if>
 </div>
