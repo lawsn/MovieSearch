@@ -10,7 +10,7 @@
 <body>
 	<h1>Hello, MOVIE!</h1>
 	<div>
-		영화제목 검색 <input type="text" id="q" name="q" />
+		 <input type="text" id="q" name="q" style="width: 150px; height: 17px;" placeholder="영화제목을 입력하세요" />
 		<%-- 영화검색 버튼 --%>
 		<input type="button" value="검색" onclick="mv.search(document.getElementById('q').value, 1);" />
 		<%-- 북마크조회 버튼 --%>
