@@ -11,8 +11,10 @@
 	<h1>Hello, MOVIE!</h1>
 	<div>
 		영화제목 검색 <input type="text" id="q" name="q" />
+		<%-- 영화검색 버튼 --%>
 		<input type="button" value="검색" onclick="mv.search(document.getElementById('q').value, 1);" />
-		<input type="button" value="북마크" onclick="mv.bookmark(0, 'DESC', 'seq');" />
+		<%-- 북마크조회 버튼 --%>
+		<input type="button" value="나의 북마크" onclick="mv.bookmark(0, 'DESC', 'seq');" style="margin-left:50px;" />
 	</div>
 	<div id="contentArea" style="display:none;"></div>
 </body>

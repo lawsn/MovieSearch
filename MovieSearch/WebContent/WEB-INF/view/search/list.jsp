@@ -1,6 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
+
+<%-- 
+  검색목록 영역 : listArea
+   - 상세보기 이벤트 시 listArea를 숨기고, detailArea를 보여준다.
+   - 목록보기 이벤트 시 listArea를 보여주고, detailArea를 숨긴다.
+--%>
 <div id="listArea" style="width:100%;">
 	<ul>
 		<li>검색어 : <c:out value="${q}" /></li>
@@ -8,7 +14,7 @@
 		<li>페이지 : <c:out value="${p}" /></li>
 	</ul>
 	<div>
-		<table summary="정보를 제공합니다." border="1" style="width:100%;">
+		<table summary="검색된 영화의 섬네일, 제목, 평점, 개봉일, 북마크를 보여줍니다." border="1" style="width:100%;">
 			<caption>영화목록</caption>
 			<colgroup>
 				<col width="72" />
@@ -29,11 +35,12 @@
 			<tbody>
 			<c:choose>
 			<c:when test="${t > 0}">
+				<%-- 검색 목록을 보여주기 위한 영화정보 반복처리 --%>
 				<c:forEach var="item" items="${items}" varStatus="status">
 				<tr>
 					<td><img src="<c:out value="${item.thumbnail[0].content}" />" onerror="this.src='/img/no_images.gif';" width="70" height="100" ></td>
 					<td>
-						<a href="#" onclick="mv.detail('${status.index}');"><c:out value="${item.title[0].content}" /></a>
+						<a href="#detailArea" onclick="mv.detail('${status.index}');"><c:out value="${item.title[0].content}" /></a>
 					</td>
 					<td><c:out value="${item.grades[0].content}" /></td>
 					<td><c:out value="${item.open_info[0].content}" /></td>
@@ -50,37 +57,47 @@
 				</tr>
 				</c:forEach>
 			</c:when>
+			<%-- 검색된 영화정보가 없을 경우 보여주는 정보 --%>
 			<c:otherwise>
 				<tr>
-					<td colspan="5" style="text-align:center;">정보가 없습니다.</td>
+					<td colspan="5" style="text-align:center;">검색된 영화정보가 없습니다.</td>
 				</tr>
 			</c:otherwise>
 			</c:choose>
 			</tbody>
 		</table>
 	</div>
-	<c:if test="${p > 1}">
-	<span>
-		<a href="javascript:mv.search('<c:out value="${q}" />', '<c:out value="${p - 1}" />');">이전</a>
-	</span>
-	</c:if>
-	<c:if test="${t > (p * r)}">
-	<span style="text-align:right;">
-		<a href="javascript:mv.search('<c:out value="${q}" />', '<c:out value="${p + 1}" />');">다음</a>
-	</span>
-	</c:if>
+	
+	<%-- 이전,다음 페이징 처리 영역 --%>
+	<div>
+		<c:if test="${p > 1}">
+		<span>
+			<a href="javascript:mv.search('<c:out value="${q}" />', '<c:out value="${p - 1}" />');">이전</a>
+		</span>
+		</c:if>
+		<c:if test="${t > (p * r)}">
+		<span style="text-align:right;">
+			<a href="javascript:mv.search('<c:out value="${q}" />', '<c:out value="${p + 1}" />');">다음</a>
+		</span>
+		</c:if>
+	</div>
 </div>
 
-<%-- 상세보기 영역 --%>
+<%-- 
+  상세보기 영역 : detailArea
+   - 상세보기 이벤트 시 listArea를 숨기고, detailArea를 보여준다.
+   - 목록보기 이벤트 시 listArea를 보여주고, detailArea를 숨긴다.
+--%>
 <div id="detailArea" style="display:none;">
+	<%-- 상세정보를 보여주기 위한 영화정보 반복처리 --%>
 	<c:forEach var="item" items="${items}" varStatus="status">
 	<div id="detail${status.index}">
 		<ul>
 			<li><img src="<c:out value="${item.thumbnail[0].content}" />" onerror="this.src='/img/no_images.gif';" ></li>
 			<li>
-				<c:if test="${item.title[0].link ne ''}"><a href="<c:out value="${item.title[0].link}" />" target="_blank"></c:if>
+				<a href="<c:out value="${item.title[0].link}" />" target="_blank">
 				<c:out value="${item.title[0].content}" />
-				<c:if test="${item.title[0].link ne ''}"></a></c:if>
+				</a>
 			</li>
 			<li><c:out value="${item.eng_title[0].content}" /></li>
 			<li><c:out value="${item.grades[0].content}" /></li>
@@ -125,7 +142,9 @@
 			</c:if>
 			<li><c:out value="${item.story[0].content}" escapeXml="false" /></li>
 		</ul>
-		<div><a href="#" onclick="mv.backList();">목록보기</a></div>
+		
+		<%-- 목록보기 버튼(상세정보 area와 토글) --%>
+		<div><a href="#listArea" onclick="mv.backList();">목록보기</a></div>
 	</div>
 	</c:forEach>
 </div>

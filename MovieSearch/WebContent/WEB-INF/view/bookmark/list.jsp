@@ -1,12 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<div>
+<div style="margin-top:20px;">
 	나의 북마크
 </div>
 
 <div>
-	<table summary="정보를 제공합니다." border="1" style="width:100%;">
+	<table summary="나의 북마크의 섬네일, 제목, 평점, 개봉일, 등록일, 삭제를 보여줍니다." border="1" style="width:100%;">
 		<caption>영화목록</caption>
 		<colgroup>
 			<col width="72" />
@@ -46,13 +46,15 @@
 		</c:when>
 		<c:otherwise>
 			<tr>
-				<td colspan="6" style="text-align:center;">정보가 없습니다.</td>
+				<td colspan="6" style="text-align:center;">저장한 북마크가 없습니다.</td>
 			</tr>
 		</c:otherwise>
 		</c:choose>
 		</tbody>
 	</table>
 </div>
+
+<%-- 이전,다음 페이징 처리 영역 --%>
 <div>
 	<c:if test="${list.first == false}">
 	<span>
