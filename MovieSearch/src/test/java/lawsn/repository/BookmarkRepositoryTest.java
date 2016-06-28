@@ -14,8 +14,10 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -24,15 +26,23 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import lawsn.domain.Bookmark;
-import lawsn.repository.BookmarkRepository;
-import lawsn.utils.DaumOpenApiHelper;
+import lawsn.service.SearchService;
+import lawsn.service.impl.DaumSearchServiceImpl;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration("classpath:database-context.xml")
+@ContextConfiguration({"classpath:servlet-context.xml", "classpath:database-context.xml"})
 public class BookmarkRepositoryTest {
 
+	@Autowired
+	SearchService searchService;
+	
     @Resource
     BookmarkRepository bookmarkRepository;
+    
+	@Before
+	public void setup(){
+		searchService = new DaumSearchServiceImpl();
+	}
 
     @Test
     public void write(){
@@ -57,7 +67,7 @@ public class BookmarkRepositoryTest {
 
     }
     
-    @Test
+//    @Test
     public void list() {
     	
     	Bookmark bookmark = new Bookmark();
@@ -77,11 +87,11 @@ public class BookmarkRepositoryTest {
     }
  
 
-    @Test
+//    @Test
     public void writeLob() throws ClientProtocolException, URISyntaxException, IOException, ParseException{
 
 
-    	String contents = DaumOpenApiHelper.getContents("1", "1", "1");
+    	String contents = searchService.getContents("1", "1", "1");
     	
     	System.out.println("contents :: " + contents);
     	

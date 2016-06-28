@@ -1,4 +1,4 @@
-package lawsn.utils;
+package lawsn.service;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -9,16 +9,32 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+import org.junit.Before;
 import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 
-import lawsn.utils.DaumOpenApiHelper;
+import lawsn.service.impl.DaumSearchServiceImpl;
 
-public class DaumOpenApiHelperTest {
+public class DaumSearchServiceTest {
+
+	@Autowired
+	SearchService searchService;
+
+	@Before
+	public void setup(){
+		// 이곳에서 SearchController를 MockMvc 객체로 만듭니다.
+		searchService = new DaumSearchServiceImpl();
+	}
 
 	@Test
 	public void sample0() throws ClientProtocolException, URISyntaxException, IOException, ParseException {
 
-		String contents = DaumOpenApiHelper.getContents("007", "2", "1");
+		if(searchService == null) {
+			System.err.println("searchServiceError");
+			return;
+		}
+		
+		String contents = searchService.getContents("007", "2", "1");
 		
 		System.out.println("contents : " + contents);
 

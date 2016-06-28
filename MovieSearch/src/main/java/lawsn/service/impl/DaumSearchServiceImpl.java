@@ -27,7 +27,7 @@ import lawsn.service.SearchService;
 import lawsn.vo.DataVO;
 
 /**
- * 다음 Open API 영화컨텐츠를 사용하는 검색서비스 구현 클래스
+ * 다음 Open API 영화컨텐츠를 사용하여 영화를 검색하는 서비스 구현 클래스
  *
  * @version 1.0
  * @author 오범석

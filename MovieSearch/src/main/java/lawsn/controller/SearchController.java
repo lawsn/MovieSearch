@@ -14,7 +14,7 @@ import lawsn.service.SearchService;
 import lawsn.vo.DataVO;
 
 /**
- * 영화정보를 검색하여 검색된 정보를 전달하는 클래스
+ * 영화정보를 검색하기 위해 요청 정보를 받고 결과를 전달하는 컨트롤러 클래스
  *
  * @version 1.0
  * @author 오범석
@@ -27,6 +27,9 @@ public class SearchController {
 	
 	/**
 	 * 영화검색 메인화면
+	 * <pre>
+	 * uri : /index
+	 * </pre>
 	 * 
 	 * @return index.jsp
 	 */
@@ -37,12 +40,15 @@ public class SearchController {
 	
 	/**
 	 * 검색어로 영화 정보 검색
+	 * <pre>
+	 * uri : /search
+	 * </pre>
 	 * 
 	 * @param q 검색어
 	 * @param result 한 페이지에 보여질 결과 수
 	 * @param pageno 검색 결과의 페이지 번호
-	 * @param model 화면에서 정보를 엑세스를 위한 객체
-	 * @return InternalResourceViewResolver (jsp)
+	 * @param model 화면에서 정보를 액세스를 위한 객체
+	 * @return 검색결과조회 화면 (InternalResourceViewResolver - jsp)
 	 */
 	@RequestMapping("/search")
 	public String search(@RequestParam("q") String q,
@@ -50,11 +56,12 @@ public class SearchController {
 			@RequestParam(value="p", required=false, defaultValue="1") String pageno,
 		    Model model) {
 		
-		// 화면출력을 위하여 정보설정
+		// 화면출력을 위하여 정보설정 (검색조건)
 		model.addAttribute("q", q); // 검색어
 		model.addAttribute("r", result); // 페이지 당 조회 수
 		model.addAttribute("p", pageno); // 페이지 번호
-		
+
+		// 검색 요청
 		String jsonData = searchService.getContents(q, result, pageno);
 		
 		// 검색 오류 처리
@@ -78,28 +85,8 @@ public class SearchController {
 				model.addAttribute("items", items);
 			}
 		}
-		
 	
 		// 검색 결과 출력
 		return "search/list";
-	}
-	
-	@RequestMapping("/search2")
-	@ResponseBody
-	public String search2(@RequestParam("q") String q,
-			@RequestParam(value="r", required=false, defaultValue="1") String result,
-			@RequestParam(value="p", required=false, defaultValue="1") String pageno,
-			Model model) {
-		
-		// 영화정보를 json 형태로 조회
-		String jsonData = searchService.getContents(q, result, pageno);
-		
-		// 검색 오류 처리
-		if(jsonData == null) {
-			return "ERROR";
-		}
-		
-		return jsonData;
-			
 	}
 }

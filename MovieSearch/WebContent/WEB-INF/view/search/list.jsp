@@ -33,12 +33,12 @@
 				<tr>
 					<td><img src="<c:out value="${item.thumbnail[0].content}" />" onerror="this.src='/img/no_images.gif';" width="70" height="100" ></td>
 					<td>
-						<a href="#" onclick="ssm.detail('${status.index}');"><c:out value="${item.title[0].content}" /></a>
+						<a href="#" onclick="mv.detail('${status.index}');"><c:out value="${item.title[0].content}" /></a>
 					</td>
 					<td><c:out value="${item.grades[0].content}" /></td>
 					<td><c:out value="${item.open_info[0].content}" /></td>
 					<td>
-						<a href="javascript:ssm.save('${status.index}');">저장</a>
+						<a href="javascript:mv.save('${status.index}');">저장</a>
 						<form id="save${status.index}" name="save${status.index}" method="post">
 	 						<input type="hidden" name="thumbnail" value="<c:out value="${item.thumbnail[0].content}" />" />
 							<input type="hidden" name="title" value="<c:out value="${item.title[0].content}" />" />
@@ -61,12 +61,12 @@
 	</div>
 	<c:if test="${p > 1}">
 	<span>
-		<a href="javascript:ssm.search('<c:out value="${q}" />', '<c:out value="${p - 1}" />');">이전</a>
+		<a href="javascript:mv.search('<c:out value="${q}" />', '<c:out value="${p - 1}" />');">이전</a>
 	</span>
 	</c:if>
 	<c:if test="${t > (p * r)}">
 	<span style="text-align:right;">
-		<a href="javascript:ssm.search('<c:out value="${q}" />', '<c:out value="${p + 1}" />');">다음</a>
+		<a href="javascript:mv.search('<c:out value="${q}" />', '<c:out value="${p + 1}" />');">다음</a>
 	</span>
 	</c:if>
 </div>
@@ -125,7 +125,7 @@
 			</c:if>
 			<li><c:out value="${item.story[0].content}" escapeXml="false" /></li>
 		</ul>
-		<div><a href="#" onclick="ssm.backList();">목록보기</a></div>
+		<div><a href="#" onclick="mv.backList();">목록보기</a></div>
 	</div>
 	</c:forEach>
 </div>

@@ -10,6 +10,12 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 
 import lawsn.vo.DataVO;
 
+/**
+ * 영화를 검색하는 서비스 인터페이스
+ *
+ * @version 1.0
+ * @author 오범석
+ */
 public interface SearchService {
 
 	/**

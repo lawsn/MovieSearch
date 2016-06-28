@@ -1,29 +1,10 @@
 /**
  * 
  */
-var ssm = function() {
+var mv = function() {
 	
 	return {
-		search2 : function(q, p) {
-			
-			if(q.trim() === '') {
-				alert('검색어를 입력하세요.');
-				return;
-			}
-			
-			$.ajax({
-				type : 'POST',
-				dataType : 'json',
-				url : '/search2.do',
-				data : {'q' : q, 'p' : p},
-				success : function(data) {
-					alert(data.channel);
-					$('#contentArea').html(data);
-				}
-			});
-			
-		},
-		
+
 		search : function(q, p) {
 			
 			if(q.trim() === '') {
@@ -66,8 +47,11 @@ var ssm = function() {
 				url : '/bookmark/save.do',
 				data : $(f).serialize(),
 				success : function(data) {
-					if(data == 'SUCCESS') {
+					var json = JSON.parse(data);
+					if(json.result && json.result == 'SUCCESS') {
 						alert('저장되었습니다.');
+					}else {
+						alert('저장 시 오류가 발생하였습니다.');
 					}
 				}
 			});
@@ -82,9 +66,12 @@ var ssm = function() {
 				url : '/bookmark/delete.do',
 				data : {'seq' : seq},
 				success : function(data) {
-					if(data == 'SUCCESS') {
+					var json = JSON.parse(data);
+					if(json.result && json.result == 'SUCCESS') {
 						alert('삭제되었습니다.');
-						ssm.bookmark();
+						mv.bookmark();
+					}else {
+						alert('삭제 시 오류가 발생하였습니다.');
 					}
 				}
 			});

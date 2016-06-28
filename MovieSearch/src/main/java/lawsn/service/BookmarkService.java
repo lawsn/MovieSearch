@@ -5,6 +5,12 @@ import org.springframework.data.domain.Sort.Direction;
 
 import lawsn.domain.Bookmark;
 
+/**
+ * 북마크를 관리하는 서비스 인터페이스
+ *
+ * @version 1.0
+ * @author 오범석
+ */
 public interface BookmarkService {
 
 	/**

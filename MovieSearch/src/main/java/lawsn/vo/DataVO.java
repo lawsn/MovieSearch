@@ -1,5 +1,11 @@
 package lawsn.vo;
 
+/**
+ * 영화정보 항목별 세부정보를 담는 클래스
+ * 
+ * @version 1.0
+ * @author 오범석
+ */
 public class DataVO {
 
 	/**
@@ -50,7 +56,7 @@ public class DataVO {
 	@Override
 	public String toString() {
 		
-		return "{\"content\":\"" + content + "\", \"link\":\"" + link + "\"}";
+		return "DataVO [content=" + content + ", link=" + link + "]";
 	}
 	
 }

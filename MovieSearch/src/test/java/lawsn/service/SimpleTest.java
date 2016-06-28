@@ -1,4 +1,4 @@
-package lawsn.utils;
+package lawsn.service;
 
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;

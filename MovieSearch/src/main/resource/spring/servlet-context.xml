@@ -16,9 +16,15 @@
 	<mvc:annotation-driven />
 	
 	<!-- scan Controller -->
-	<context:component-scan base-package="lawsn.controller" />
+	<context:component-scan base-package="lawsn.controller">
+		<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller" />
+	</context:component-scan>
+	
 	<!-- scan Service -->
-	<context:component-scan base-package="lawsn.service" />
+	<context:component-scan base-package="lawsn.service">
+		<context:include-filter type="annotation" expression="org.springframework.stereotype.Service" />
+		<context:include-filter type="regex" expression=".*Impl" />
+	</context:component-scan>
 
 	<!-- ViewResolver -->
 	<bean id="viewResolver"

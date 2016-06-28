@@ -14,7 +14,7 @@ import lawsn.repository.BookmarkRepository;
 import lawsn.service.BookmarkService;
 
 /**
- * JPA 구현 북마크 관리 클래스
+ * 북마크를 관리하는 서비스 구현 클래스
  *
  * @version 1.0
  * @author 오범석

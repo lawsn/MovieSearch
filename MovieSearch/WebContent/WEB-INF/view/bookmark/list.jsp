@@ -19,10 +19,10 @@
 		<thead>
 			<tr>
 				<th scope="col">섬네일</th>
-				<th scope="col"><a href="javascript:ssm.bookmark(0, 'ASC', 'title');">▲</a>제목<a href="javascript:ssm.bookmark(0, 'DESC', 'title');">▼</a></th>
-				<th scope="col"><a href="javascript:ssm.bookmark(0, 'ASC', 'grades');">▲</a>평점<a href="javascript:ssm.bookmark(0, 'DESC', 'grades');">▼</a></th>
-				<th scope="col"><a href="javascript:ssm.bookmark(0, 'ASC', 'openInfo');">▲</a>개봉일<a href="javascript:ssm.bookmark(0, 'DESC', 'openInfo');">▼</a></th>
-				<th scope="col"><a href="javascript:ssm.bookmark(0, 'ASC', 'createTime');">▲</a>등록일<a href="javascript:ssm.bookmark(0, 'DESC', 'createTime');">▼</a></th>
+				<th scope="col"><a href="javascript:mv.bookmark(0, 'ASC', 'title');">▲</a>제목<a href="javascript:mv.bookmark(0, 'DESC', 'title');">▼</a></th>
+				<th scope="col"><a href="javascript:mv.bookmark(0, 'ASC', 'grades');">▲</a>평점<a href="javascript:mv.bookmark(0, 'DESC', 'grades');">▼</a></th>
+				<th scope="col"><a href="javascript:mv.bookmark(0, 'ASC', 'openInfo');">▲</a>개봉일<a href="javascript:mv.bookmark(0, 'DESC', 'openInfo');">▼</a></th>
+				<th scope="col"><a href="javascript:mv.bookmark(0, 'ASC', 'createTime');">▲</a>등록일<a href="javascript:mv.bookmark(0, 'DESC', 'createTime');">▼</a></th>
 				<th scope="col">삭제</th>
 			</tr>
 		</thead>
@@ -39,7 +39,7 @@
 				<td><c:out value="${record.openInfo}" /></td>
 				<td><c:out value="${record.createDate}" /></td>
 				<td>
-					<a href="javascript:ssm.remove('${record.seq}');">삭제</a>
+					<a href="javascript:mv.remove('${record.seq}');">삭제</a>
 				</td>
 			</tr>
 			</c:forEach>
@@ -56,12 +56,12 @@
 <div>
 	<c:if test="${list.first == false}">
 	<span>
-		<a href="javascript:ssm.bookmark('<c:out value="${list.number - 1}" />', '${o}', '${s}');">이전</a>
+		<a href="javascript:mv.bookmark('<c:out value="${list.number - 1}" />', '${o}', '${s}');">이전</a>
 	</span>
 	</c:if>
 	<c:if test="${list.last == false}">
 	<span style="text-align:right;">
-		<a href="javascript:ssm.bookmark('<c:out value="${list.number + 1}" />', '${o}', '${s}');" style="text-align:right;">다음</a>
+		<a href="javascript:mv.bookmark('<c:out value="${list.number + 1}" />', '${o}', '${s}');" style="text-align:right;">다음</a>
 	</span>
 	</c:if>
 </div>
