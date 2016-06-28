@@ -62,27 +62,6 @@ public class BookmarkController {
 	}
 	
 	/**
-	 * 북마크번호로 북마크 정보 조회
-	 * <pre>
-	 * uri : /bookmark/view
-	 * </pre>
-	 * 
-	 * @param seq 북마크번호
-	 * @param model 화면에서 정보를 액세스를 위한 객체
-	 * @return 북마크 화면 (InternalResourceViewResolver - jsp)
-	 * @see 사용안함
-	 */
-	@RequestMapping("/bookmark/view")
-	public String getBookmark(@RequestParam("seq") int seq, Model model) {
-		
-		// 북마크 조회 요청
-		Bookmark bookmark = this.bookmarkService.findOne(seq);
-		model.addAttribute(bookmark);
-		
-		return "bookmark/view";
-	}
-	
-	/**
 	 * 북마크 저장 요청
 	 * <pre>
 	 * uri : /bookmark/save

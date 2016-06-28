@@ -65,6 +65,7 @@ public class SearchController {
 		
 		// 검색 오류 처리
 		if(jsonData == null) {
+			System.err.println("검색오류");
 			return "search/list";
 		}
 	
