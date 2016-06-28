@@ -3,13 +3,14 @@ package lawsn.controller;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import lawsn.utils.DaumOpenApiHelper;
+import lawsn.service.SearchService;
 import lawsn.vo.DataVO;
 
 /**
@@ -20,6 +21,9 @@ import lawsn.vo.DataVO;
  */
 @Controller
 public class SearchController {
+	
+	@Autowired
+	private SearchService searchService;
 	
 	/**
 	 * 영화검색 메인화면
@@ -47,11 +51,11 @@ public class SearchController {
 		    Model model) {
 		
 		// 화면출력을 위하여 정보설정
-		model.addAttribute("q", q);
-		model.addAttribute("r", result);
-		model.addAttribute("p", pageno);
+		model.addAttribute("q", q); // 검색어
+		model.addAttribute("r", result); // 페이지 당 조회 수
+		model.addAttribute("p", pageno); // 페이지 번호
 		
-		String jsonData = DaumOpenApiHelper.getContents(q, result, pageno);
+		String jsonData = searchService.getContents(q, result, pageno);
 		
 		// 검색 오류 처리
 		if(jsonData == null) {
@@ -59,14 +63,20 @@ public class SearchController {
 		}
 	
 		// 검색 총 개수 설정
-		long totalCount = DaumOpenApiHelper.getTotalCount(jsonData);
+		long totalCount = searchService.getTotalCount(jsonData);
 		model.addAttribute("t", totalCount);
 		
 		// 검색된 정보가 있을 경우 영화정보 수신
 		if(totalCount > 0L) {
 			
-			List<Map<String, List<DataVO>>> items = DaumOpenApiHelper.getItems(jsonData);
-			model.addAttribute("items", items);
+			List<Map<String, List<DataVO>>> items = searchService.getItems(jsonData);
+			if(items == null || items.size() == 0) {
+				// 영화정보가 없는 경우 검색건수를 0으로 처리
+				model.addAttribute("t", 0L);
+			}else {
+				// 영화정보 목록을 화면에 전달하기 위해 지정
+				model.addAttribute("items", items);
+			}
 		}
 		
 	
@@ -81,7 +91,8 @@ public class SearchController {
 			@RequestParam(value="p", required=false, defaultValue="1") String pageno,
 			Model model) {
 		
-		String jsonData = DaumOpenApiHelper.getContents(q, result, pageno);
+		// 영화정보를 json 형태로 조회
+		String jsonData = searchService.getContents(q, result, pageno);
 		
 		// 검색 오류 처리
 		if(jsonData == null) {

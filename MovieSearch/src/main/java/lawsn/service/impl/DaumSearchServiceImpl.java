@@ -1,4 +1,4 @@
-package lawsn.utils;
+package lawsn.service.impl;
 
 import java.io.IOException;
 import java.net.URI;
@@ -21,41 +21,34 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+import org.springframework.stereotype.Service;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-
+import lawsn.service.SearchService;
 import lawsn.vo.DataVO;
 
 /**
- * 다음 Open API 영화컨텐츠 수신 및 파싱 처리 클래스
+ * 다음 Open API 영화컨텐츠를 사용하는 검색서비스 구현 클래스
  *
- * @version 1.0, 
+ * @version 1.0
  * @author 오범석
  */
-public class DaumOpenApiHelper {
+@Service("searchService")
+public class DaumSearchServiceImpl implements SearchService {
 
 	/**
 	 * 다음 Open API 영화컨텐츠 등록 앱 API KEY
 	 * APP : 반갑다영화야
 	 */
-	private static String DAUM_OPENAPI_MOVIE_APIKEY = "5c48b3294791da714517306f99f1f07d";
-	
+//	private static String DAUM_OPENAPI_MOVIE_APIKEY = "5c48b3294791da714517306f99f1f07d";
+
 	/**
 	 * 다음 Open API 영화컨텐츠 등록 앱 API KEY
 	 * APP : 제한걸렸네
 	 */
-	//private static String DAUM_OPENAPI_MOVIE_APIKEY = "88972fddecd6794e12530a7ece11ad2d";
+	private static String DAUM_OPENAPI_MOVIE_APIKEY = "88972fddecd6794e12530a7ece11ad2d";
 
-	/**
-	 * 다음 OpenAPI 영화정보 검색요청 후 json 정보 수신
-	 * 
-	 * @param q 검색어
-	 * @param result 한 페이지에 보여질 결과 수
-	 * @param pageno 검색 결과의 페이지 번호
-	 * @return 영화정보 결과 JsonData
-	 */
-	public static String getContents(String q, String result, String pageno) {
-
+	@Override
+	public String getContents(String q, String result, String pageno) {
 		try {
 			URI uri = new URI("https://apis.daum.net/contents/movie");
 			uri = new URIBuilder(uri).addParameter("apikey", DAUM_OPENAPI_MOVIE_APIKEY)
@@ -70,7 +63,7 @@ public class DaumOpenApiHelper {
 			String jsonData = EntityUtils.toString(entity);
 			
 			// 오류 일 경우 null
-			if(DaumOpenApiHelper.isApiError(jsonData)) {
+			if(this.isApiError(jsonData)) {
 				return null;
 			}
 
@@ -81,7 +74,6 @@ public class DaumOpenApiHelper {
 			// 오류 일 경우 null
 			return null;
 		}
-
 	}
 	
 	/**
@@ -103,7 +95,7 @@ public class DaumOpenApiHelper {
 	 * @return 에러여부 (true:에러)
 	 * @throws ParseException 
 	 */
-	public static boolean isApiError(String jsonData) {
+	private boolean isApiError(String jsonData) {
 		
 		try {
 			JSONParser jsonParser = new JSONParser();
@@ -123,18 +115,9 @@ public class DaumOpenApiHelper {
 		}
 		
 	}
-	
-	/**
-	 * 검색된 영화정보 총 개수 반환
-	 * 
-	 * @param jsonData 다음 Open API 영화검색 출력정보
-	 * @return 영화정보 총 개수
-	 * @throws ParseException
-	 * @throws JsonProcessingException
-	 * @throws IOException
-	 */
-	public static long getTotalCount(String jsonData) {
-		
+
+	@Override
+	public long getTotalCount(String jsonData) {
 		try {
 			JSONParser jsonParser = new JSONParser();
 			JSONObject jsonObject = (JSONObject) jsonParser.parse(jsonData);
@@ -149,18 +132,9 @@ public class DaumOpenApiHelper {
 			return 0L;
 		}
 	}
-	
-	/**
-	 * 다음 OpenAPI 영화목록
-	 * 
-	 * @param jsonData 다음 Open API 영화검색 출력정보
-	 * @return 영화목록
-	 * @throws ParseException 
-	 * @throws JsonProcessingException
-	 * @throws IOException
-	 */
-	public static List<Map<String, List<DataVO>>> getItems(String jsonData) {
-		
+
+	@Override
+	public List<Map<String, List<DataVO>>> getItems(String jsonData) {
 		try {
 			List<Map<String, List<DataVO>>> items = new ArrayList<Map<String, List<DataVO>>>();
 			
@@ -191,7 +165,7 @@ public class DaumOpenApiHelper {
 					String key = (String) keys.next();
 					
 					// 다음 Open API 세부데이터 정보 추출
-					item.put(key, DaumOpenApiHelper.getDataList(itemObject, key));
+					item.put(key, this.getDataList(itemObject, key));
 				}
 				
 				if(item != null) {
@@ -206,9 +180,8 @@ public class DaumOpenApiHelper {
 			// 파싱에러시 없는거로 처리
 			return null;
 		}
-			
 	}
-	
+
 	/**
 	 * 영화 세부정보
 	 * 
@@ -216,7 +189,7 @@ public class DaumOpenApiHelper {
 	 * @param fieldName 세부정보명
 	 * @return 영화 세부정보 목록
 	 */
-	private static List<DataVO> getDataList(JSONObject itemNode, String fieldName) {
+	private List<DataVO> getDataList(JSONObject itemNode, String fieldName) {
 		
 		List<DataVO> datas = new LinkedList<DataVO>();
 		
@@ -259,7 +232,7 @@ public class DaumOpenApiHelper {
 	 * @param fieldObject 영화정보 데이터
 	 * @return DataVO 영화정보 (내용, 링크)
 	 */
-	private static DataVO parseObjectToData(Object fieldObject) {
+	private DataVO parseObjectToData(Object fieldObject) {
 		
 		DataVO data = null;
 		
@@ -278,4 +251,5 @@ public class DaumOpenApiHelper {
 		return data;
 		
 	}
+	
 }

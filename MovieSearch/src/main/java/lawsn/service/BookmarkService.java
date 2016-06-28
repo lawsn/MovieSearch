@@ -1,38 +1,44 @@
 package lawsn.service;
 
-import javax.annotation.Resource;
-import javax.transaction.Transactional;
-
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort.Direction;
-import org.springframework.stereotype.Service;
 
 import lawsn.domain.Bookmark;
-import lawsn.repository.BookmarkRepository;
 
-@Service
-@Transactional
-public class BookmarkService {
+public interface BookmarkService {
 
-	@Resource
-	private BookmarkRepository bookmarkRepository;
+	/**
+	 * 북마크 목록 검색
+	 * 
+	 * @param result 페이지당 검색건수
+	 * @param pageno 검색할 페이지번호
+	 * @param direction 정렬순서
+	 * @param sortField 정렬필드
+	 * @return 페이징처리된 북마크 정보
+	 */
+	public Page<Bookmark> findAll(int result, int pageno, Direction direction, String sortField);
 	
-	public Page<Bookmark> findAll(int result, int pageno, Direction direction, String sortField) {
-		Pageable pageable = new PageRequest(result, pageno, direction, sortField);
-		return this.bookmarkRepository.findAll(pageable);
-	}
+	/**
+	 * 북마크 조회 by PK
+	 * 
+	 * @param seq 북마크 PK
+	 * @return 북마크 정보
+	 */
+	public Bookmark findOne(int seq);
 	
-	public Bookmark findOne(int seq) {
-		return this.bookmarkRepository.findOne(seq);
-	}
+	/**
+	 * 북마크 등록
+	 * 
+	 * @param bookmark 북마크 정보
+	 * @return 등록된 북마크 정보
+	 */
+	public Bookmark crate(Bookmark bookmark);
 	
-	public Bookmark crate(Bookmark bookmark) {
-		return this.bookmarkRepository.save(bookmark);
-	}
-	
-	public void delete(int seq) {
-		this.bookmarkRepository.delete(seq);
-	}
+	/**
+	 * 북마크 삭제 by PK
+	 * 
+	 * @param seq 북마크 PK
+	 */
+	public void delete(int seq);
+
 }
