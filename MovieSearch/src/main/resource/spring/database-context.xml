@@ -48,7 +48,7 @@
 				<!-- SQL 출력 -->
 				<prop key="hibernate.show_sql">true</prop>
 				<!-- SQL 출력 포맷처리 -->
-				<prop key="hibernate.format_sql">true</prop>
+				<prop key="hibernate.format_sql">false</prop>
 				<!-- 테이블 자동 생성 -->
 				<prop key="hibernate.hbm2ddl.auto">create</prop>
 			</props>
