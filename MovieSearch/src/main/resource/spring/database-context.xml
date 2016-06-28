@@ -50,7 +50,7 @@
 				<!-- SQL 출력 포맷처리 -->
 				<prop key="hibernate.format_sql">true</prop>
 				<!-- 테이블 자동 생성 -->
-				<!-- <prop key="hibernate.hbm2ddl.auto">create</prop> -->
+				<prop key="hibernate.hbm2ddl.auto">create</prop>
 			</props>
 		</property>
 		<!-- 패키지 지정 모델 데이터 초기화 -->
