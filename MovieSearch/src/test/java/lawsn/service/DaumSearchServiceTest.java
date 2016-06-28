@@ -1,57 +1,53 @@
 package lawsn.service;
 
-import java.io.IOException;
-import java.net.URISyntaxException;
-import java.util.Iterator;
+import static org.junit.Assert.assertEquals;
 
-import org.apache.http.client.ClientProtocolException;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
+import java.util.List;
+import java.util.Map;
+
 import org.json.simple.parser.ParseException;
-import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.junit.runners.MethodSorters;
 
 import lawsn.service.impl.DaumSearchServiceImpl;
+import lawsn.vo.DataVO;
 
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class DaumSearchServiceTest {
 
-	@Autowired
-	SearchService searchService;
+	private static SearchService searchService;
 
-	@Before
-	public void setup(){
-		// 이곳에서 SearchController를 MockMvc 객체로 만듭니다.
+	@BeforeClass
+	public static void setup() {
 		searchService = new DaumSearchServiceImpl();
 	}
 
 	@Test
-	public void sample0() throws ClientProtocolException, URISyntaxException, IOException, ParseException {
-
-		if(searchService == null) {
-			System.err.println("searchServiceError");
-			return;
-		}
+	public void aTestSearch007() throws ParseException {
 		
-		String contents = searchService.getContents("007", "2", "1");
+		String jsonData = searchService.getContents("007", "2", "1");
+		long totalCount = searchService.getTotalCount(jsonData);
 		
-		System.out.println("contents : " + contents);
-
-		JSONParser jsonParser = new JSONParser();
-		JSONObject jsonObject = (JSONObject) jsonParser.parse(contents);
-		JSONObject channelObject = (JSONObject) jsonObject.get("channel");
-
-		JSONArray itemArray = (JSONArray) channelObject.get("item");
-
-		Iterator<JSONObject> itItems = itemArray.iterator();
-		while (itItems.hasNext()) {
-			JSONObject itemObject = itItems.next();
-
-			System.out.println(itemObject.toJSONString());
-
-		}
-
+		assertEquals(totalCount, 3L);
+		
+		List<Map<String, List<DataVO>>> list = searchService.getItems(jsonData);
+		assertEquals(list.size(), 2); // 한페이지에 2건만 조회하도록 하였음.
+		
+	}
+	
+	@Test
+	public void aTestSearch007Page2() throws ParseException {
+		
+		String jsonData = searchService.getContents("007", "2", "2");
+		long totalCount = searchService.getTotalCount(jsonData);
+		
+		assertEquals(totalCount, 3L);
+		
+		List<Map<String, List<DataVO>>> list = searchService.getItems(jsonData);
+		assertEquals(list.size(), 1); // 2페이지 조회 건수.
+		
 	}
 
 }
