@@ -17,12 +17,12 @@
 	<!-- annotation class - bean -->
 	<context:annotation-config />
 
-	<!-- HSQL embedded -->
-	<jdbc:embedded-database id="dataSource" type="HSQL"></jdbc:embedded-database>
+	<!-- embedded HSQL database -->
+	<jdbc:embedded-database id="dataSource" type="HSQL" />
 	
 	<!-- <jdbc:initialize-database data-source="dataSource" ignore-failures="DROPS">
-		<jdbc:script location="classpath:/sql/schema.sql" />
-		<jdbc:script location="classpath:/sql/data.sql" />
+		<jdbc:script location="classpath:sql/schema.sql" />
+		<jdbc:script location="classpath:sql/data.sql" />
 	</jdbc:initialize-database> -->
 
 
@@ -36,7 +36,7 @@
 			<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter" />
 		</property>
 		<property name="dataSource" ref="dataSource" />
-		<!-- property setting -->
+		<!-- Hibernate property setting -->
 		<property name="jpaProperties">
 			<props>
 				<!-- Hsql 형식에 맞게 변환해주는 클래스 -->
@@ -50,13 +50,14 @@
 				<!-- SQL 출력 포맷처리 -->
 				<prop key="hibernate.format_sql">true</prop>
 				<!-- 테이블 자동 생성 -->
-				<prop key="hibernate.hbm2ddl.auto">create</prop>
+				<!-- <prop key="hibernate.hbm2ddl.auto">create</prop> -->
 			</props>
 		</property>
 		<!-- 패키지 지정 모델 데이터 초기화 -->
 		<property name="packagesToScan" value="lawsn.domain" />
 	</bean>
 	
+	<!-- Transaction -->
 	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
 		<property name="entityManagerFactory" ref="entityManagerFactory"></property>
 	</bean>
