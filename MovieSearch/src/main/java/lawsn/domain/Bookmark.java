@@ -34,31 +34,31 @@ public class Bookmark {
 	/**
 	 * 섬네일
 	 */
-	@Column(name="thumbnail")
+	@Column(name="thumbnail", length=255)
 	private String thumbnail;
 	
 	/**
 	 * 영화제목
 	 */
-	@Column(name="title")
+	@Column(name="title", length=100)
 	private String title;
 
 	/**
 	 * 영화평점
 	 */
-	@Column(name="grades")
+	@Column(name="grades", length=5)
 	private String grades;
 	
 	/**
 	 * 개봉일
 	 */
-	@Column(name="open_info")
+	@Column(name="open_info", length=10)
 	private String openInfo;
 	
 	/**
 	 * 영화정보 URL
 	 */
-	@Column(name="title_link")
+	@Column(name="title_link", length=255)
 	private String titleLink;
 	
 	/**
