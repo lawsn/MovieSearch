@@ -1,5 +1,5 @@
 /**
- * Movie Search Event JavaScript
+ * Movie Search Event JavaScript File
  */
 var mv = function() {
 	
