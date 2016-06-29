@@ -1,10 +1,16 @@
 /**
- * 
+ * Movie Search Event JavaScript
  */
 var mv = function() {
 	
 	return {
 
+		/**
+		 * 영화검색 요청
+		 * 
+		 * @param {String} q 검색어 (필수)
+		 * @param {String} p 페이지번호
+		 */
 		search : function(q, p) {
 			
 			if(q.trim() === '') {
@@ -23,7 +29,14 @@ var mv = function() {
 			});
 			
 		},
-		
+
+		/**
+		 * 영화정보 상세보기
+		 * <br>
+		 * 목록영역 숨김 후 상세영역의 검색목록순번 영역 보이게 처리
+		 * 
+		 * @param {String} no 검색목록순번
+		 */
 		detail : function(no) {
 			$('#listArea').hide();
 			$('#detailArea').show();
@@ -31,12 +44,26 @@ var mv = function() {
 			$('#detail' + no).show();
 		},
 		
+		/**
+		 * 영화목록보기
+		 * <br>
+		 * 상세영역 숨김 후 목록영역 보이게 처리
+		 */
 		backList : function() {
-			$('#listArea').show();
 			$('#detailArea').hide();
+			$('#listArea').show();
 			$('#detailArea').find('div[id^="detail"]').hide();
 		},
 		
+		/**
+		 * 북마크 저장 요청
+		 * <br/>
+		 * 검색목록순번에 해당하는 북마크저장 폼객체를 전송
+		 * <br/>
+		 * 폼객체정보 : 섬네일,제목,평점,개봉일,영화정보URL
+		 * 
+		 * @param {String} no 검색목록순번
+		 */
 		save : function(no) {
 			
 			var f = document.forms['save' + no];
@@ -58,6 +85,11 @@ var mv = function() {
 			
 		},
 		
+		/**
+		 * 북마크 삭제 요청
+		 * 
+		 * @param {String} seq 북마크 PK
+		 */
 		remove : function(seq) {
 			
 			$.ajax({
@@ -78,6 +110,13 @@ var mv = function() {
 			
 		},
 		
+		/**
+		 * 북마크 목록조회 요청
+		 * 
+		 * @param {String} p 페이지번호
+		 * @param {String} o 정렬순서(ASC:오름차순, DESC:내림차순)
+		 * @param {String} s 정렬필드
+		 */
 		bookmark : function(p, o, s) {
 			
 			$.ajax({
@@ -91,7 +130,6 @@ var mv = function() {
 			});
 			
 		}
-		
 	
 	}
 }();
