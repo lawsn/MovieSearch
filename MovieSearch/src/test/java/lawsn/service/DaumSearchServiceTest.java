@@ -30,10 +30,10 @@ public class DaumSearchServiceTest {
 		String jsonData = searchService.getContents("007", "2", "1");
 		long totalCount = searchService.getTotalCount(jsonData);
 		
-		assertEquals(totalCount, 3L);
+		assertEquals(3L, totalCount);
 		
 		List<Map<String, List<DataVO>>> list = searchService.getItems(jsonData);
-		assertEquals(list.size(), 2); // 한페이지에 2건만 조회하도록 하였음.
+		assertEquals(2, list.size()); // 한페이지에 2건만 조회하도록 하였음.
 		
 	}
 	
@@ -43,10 +43,10 @@ public class DaumSearchServiceTest {
 		String jsonData = searchService.getContents("007", "2", "2");
 		long totalCount = searchService.getTotalCount(jsonData);
 		
-		assertEquals(totalCount, 3L);
+		assertEquals(3L, totalCount);
 		
 		List<Map<String, List<DataVO>>> list = searchService.getItems(jsonData);
-		assertEquals(list.size(), 1); // 2페이지 조회 건수.
+		assertEquals(1, list.size()); // 2페이지 조회 건수.
 		
 	}
 

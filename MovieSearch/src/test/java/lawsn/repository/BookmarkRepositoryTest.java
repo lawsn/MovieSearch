@@ -12,7 +12,6 @@ import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -21,23 +20,17 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import lawsn.domain.Bookmark;
-import lawsn.service.SearchService;
-import lawsn.service.impl.DaumSearchServiceImpl;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 @ContextConfiguration({"classpath:spring/servlet-context.xml", "classpath:spring/database-context.xml"})
 public class BookmarkRepositoryTest {
 
-	@Autowired
-	SearchService searchService;
-	
     @Resource
     BookmarkRepository bookmarkRepository;
     
 	@Before
 	public void setup(){
-		searchService = new DaumSearchServiceImpl();
 	}
 
     @Test
