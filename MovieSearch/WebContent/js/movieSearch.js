@@ -70,11 +70,10 @@ var mv = function() {
 			
 			$.ajax({
 				type : 'POST',
-				dataType : 'html',
+				dataType : 'json',
 				url : '/bookmark/save.do',
 				data : $(f).serialize(),
-				success : function(data) {
-					var json = JSON.parse(data);
+				success : function(json) {
 					if(json.result && json.result == 'SUCCESS') {
 						alert('저장되었습니다.');
 					}else {
@@ -94,11 +93,10 @@ var mv = function() {
 			
 			$.ajax({
 				type : 'POST',
-				dataType : 'html',
+				dataType : 'json',
 				url : '/bookmark/delete.do',
 				data : {'seq' : seq},
-				success : function(data) {
-					var json = JSON.parse(data);
+				success : function(json) {
 					if(json.result && json.result == 'SUCCESS') {
 						alert('삭제되었습니다.');
 						mv.bookmark();
