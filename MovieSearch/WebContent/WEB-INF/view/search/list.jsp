@@ -144,7 +144,10 @@
 		</ul>
 		
 		<%-- 목록보기 버튼(상세정보 area와 토글) --%>
-		<div><a href="#listArea" onclick="mv.backList();">목록보기</a></div>
+		<div>
+			<span><a href="#listArea" onclick="mv.backList();">목록보기</a></span>
+			<span style="padding-left: 10px;"><a href="javascript:mv.save('${status.index}');">북마크저장하기</a></span>
+		</div>
 	</div>
 	</c:forEach>
 </div>

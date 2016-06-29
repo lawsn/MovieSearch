@@ -6,7 +6,7 @@
 </div>
 
 <div>
-	<table summary="나의 북마크의 섬네일, 제목, 평점, 개봉일, 등록일, 삭제를 보여줍니다." border="1" style="width:100%;">
+	<table summary="나의 북마크 섬네일, 제목, 평점, 개봉일, 등록일, 삭제를 보여줍니다." border="1" style="width:100%;">
 		<caption>영화목록</caption>
 		<colgroup>
 			<col width="72" />
@@ -63,7 +63,7 @@
 	</c:if>
 	<c:if test="${list.last == false}">
 	<span style="position:absolute; right:40%; padding-left: 10px;">
-		<a href="javascript:mv.bookmark('<c:out value="${list.number + 1}" />', '${o}', '${s}');" style="text-align:right;">다음▶</a>
+		<a href="javascript:mv.bookmark('<c:out value="${list.number + 1}" />', '${o}', '${s}');">다음▶</a>
 	</span>
 	</c:if>
 </div>
