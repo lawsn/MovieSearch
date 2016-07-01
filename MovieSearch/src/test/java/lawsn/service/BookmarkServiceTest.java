@@ -4,7 +4,8 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 import org.json.simple.parser.ParseException;
-import org.junit.BeforeClass;
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,29 +18,30 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import lawsn.domain.Bookmark;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"classpath:spring/servlet-context.xml", "classpath:spring/database-context.xml"})
+@ContextConfiguration({"classpath:application-context-test.xml"})
 public class BookmarkServiceTest {
 
 	@Autowired
 	BookmarkService bookmarkService;
 	
 	
-	@BeforeClass
-	public static void setup() {
+	@Before
+	public void setup() {
+		
+    	Bookmark bookmark = new Bookmark();
+    	bookmark.setTitle("제목");
+    	bookmark.setGrades("10.0");
+    	
+    	bookmarkService.crate(bookmark);
+	}
+	
+	@After
+	public void tearDown() {
+		System.out.println("END");
 	}
 	
 	@Test
 	public void aTestSave() throws ParseException {
-		
-    	Bookmark bookmark = new Bookmark();
-    	bookmark.setSeq(5);
-    	bookmark.setTitle("제목");
-    	bookmark.setGrades("10.0");
-    	
-    	Bookmark create = bookmarkService.crate(bookmark);
-    	
-    	assertNotNull(create);
-    	assertEquals("제목", create.getTitle());
     	
     	Bookmark select = bookmarkService.findOne(1);
     	assertEquals("제목", select.getTitle());
@@ -49,20 +51,12 @@ public class BookmarkServiceTest {
 	@Test
 	public void bTestList() throws ParseException {
 		
-		
-    	Bookmark bookmark = new Bookmark();
-    	bookmark.setSeq(2);
-    	bookmark.setTitle("제목");
-    	bookmark.setGrades("10.0");
-    	
-    	bookmarkService.crate(bookmark);
-    	
+		Integer pageno = 0;
 		Integer result = 10;
-		Integer pageno = 1;
 		Direction direction = Sort.Direction.DESC;
 		String sortField = "seq";
 		
-		Page<Bookmark> page = bookmarkService.findAll(result, pageno, direction, sortField);
+		Page<Bookmark> page = bookmarkService.findAll(pageno, result, direction, sortField);
 		
 		assertNotNull(page);
 		
